@@ -1,0 +1,94 @@
+[project]
+name = "idotmatix-sdk"
+version = "0.1"
+description = "Allow connect with I Dot Matrix screens"
+authors = [
+    { name = "Miguel Ángel López", email = "miguel.angel.lopez.vicente@gmail.com" }
+]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/MiguelAngelLV/python-idotmatix-sdk"
+requires-python = ">3.9"
+dependencies = [
+    "bleak>=0.22.3",
+]
+
+[tool.ruff]
+target-version = "py311"
+fix = true
+
+[tool.ruff.lint]
+ignore = [
+  "A005", # It is just wrong
+  "ANN101", # Self... explanatory
+  "ANN401", # Opiniated warning on disallowing dynamically typed expressions
+  "D203", # Conflicts with other rules
+  "D213", # Conflicts with other rules
+  "RUF012", # Just broken
+  "TID252", # Relative imports
+
+  # Formatter conflicts
+  "COM812",
+  "COM819",
+  "D206",
+  "E501",
+  "ISC001",
+  "Q000",
+  "Q001",
+  "Q002",
+  "Q003",
+  "W191",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["idotmatrix"]
+
+[tool.coverage.paths]
+source = ["idotmatrix/"]
+
+[tool.coverage.report]
+fail_under = 90
+skip_covered = true
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == \"__main__\":",
+    "raise NotImplementedError",
+]
+
+[tool.pytest.ini_options]
+minversion = 6.0
+testpaths = "tests"
+addopts = "-vv -s --cov --cov-report term --cov-report html -m 'not real_api_call'"
+log_level = "INFO"
+log_format = "%(asctime)s.%(msecs)03d %(levelname)s: (%(filename)s:%(lineno)s): %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+log_cli = true
+log_cli_format = "%(asctime)s.%(msecs)03d %(name)s: %(lineno)s %(levelname)s: %(message)s"
+log_cli_level = "INFO"
+log_cli_date_format = "%H:%M:%S"
+
+
+[tool.pytest]
+testpaths = "tests"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest-cov",
+    "pytest-sugar>=0.9.2",
+    "pytest>=8.3.5",
+    "pytest-asyncio",
+    "pre-commit>=3.6.0",
+    "pre-commit-hooks>=4.5.0",
+    "pylint>=3.1.0",
+    "ruff>=0.3.2",
+]
+
+ [tool.hatch.build.targets.wheel]
+ packages = ["idotmatrix_sdk"]
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
