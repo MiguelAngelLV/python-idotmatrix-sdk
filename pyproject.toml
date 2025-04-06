@@ -1,5 +1,5 @@
 [project]
-name = "idotmatix-sdk"
+name = "idotmatrix-sdk"
 version = "0.1"
 description = "Allow connect with I Dot Matrix screens"
 authors = [
